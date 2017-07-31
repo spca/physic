@@ -1,0 +1,55 @@
+ ##literate program
+  write a InitGlobals like this:
+  '
+    <Function Definitions>≡
+      void InitGlobals(){
+        <Initialize Gloab Varialbes>
+      }
+  '
+  
+  when  we introduce a new global variable ErrorCount somewhere later in the Program, now write:
+   '
+    <Initialize Global Variables>≡
+      ErrorCount = 0;
+   '
+   
+   later on ,we may introduce another global FragmentsProcessed, we need append it to the fragment:
+    '
+      Initialize Global Variables>+≡
+        FragmentsProcessed = 0;
+    '
+    when tangled  the  result of above fragment definitions is the code:
+    
+ '
+  void InitGlobals(){
+    ErrorCount = 0;
+    FragmentsProccessed = 0;   
+  }
+ '
+ 
+  by making use of the text substitution(文本替换) that is made easy by fragments,we can decompose(分解) complex functions into logically 
+  distinct part(使得操作容易理解).we can write a function as a series of fragments:
+    <Function Definitions>+≡
+      void func(int x, int y, double *data){
+        <Check validity of arguments>
+        if (x<y){
+          <Swap parameter values>
+        }
+        <Do precomputation before loop>
+        <Loop through and update data array>
+      }
+      
+      
+      
+      ## 1.3 code Optimization
+      
+        some basic optimization principles :
+        
+          * the slowest mathematical operations are divider,square-roots,trigonometric functions.(除法，平方根，三角函数)
+          * declaring short functions as inline.(使段的函数内联，减少函数调用的运行时开销)
+          * As the speed of CPUs continues to grow more quickly than the speed at which data canbe loaded from main memory into the CPU,waiting for values from memory is becoming a  major performance barrier.
+            由于CPU的速度比从主内存加载到CPU的速度快得多，等待从内存中获得的值正成为一个主要的性能障碍。
+            组织算法与数据结构从缓存中。
+            
+            
+     
